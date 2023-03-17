@@ -1,4 +1,4 @@
 # Priority ranges
-template: [1001, 2000]
+example: [1001, 2000]
 team1: [2001, 3000]
 team2: [3001, 4000]

@@ -4,8 +4,8 @@ rules:
   direction: 'INGRESS'
   action: 'allow'
   protocol: 'tcp'
-  ranges: [10.0.0.0/24]
+  ranges: [10.0.0.0/32]
   ports:
-  - 5432
+  - 9999
   target_service_accounts:
   - '661552267468-compute@developer.gserviceaccount.com'

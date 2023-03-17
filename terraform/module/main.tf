@@ -7,10 +7,6 @@ locals {
   default_priority = local.priority_end
 }
 
-output "rules_map" {
-  value = local.team_config_map
-}
-
 resource "google_compute_firewall" "firewall_rule" {
   for_each = { for rule in local.rules_map.rules : rule.name => rule }
   project  = var.project_id
