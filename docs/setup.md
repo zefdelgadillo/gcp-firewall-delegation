@@ -24,12 +24,12 @@ export bucket_name=BUCKET_NAME
 ```sh
 gcloud storage buckets create gs://$bucket_name
 ```
-## Set permissions
+## Set permissions to Cloud Build Service Account
 Cloud Build will use its Service Account to run Terraform, build Firewall Rule resources, and manage storage bucket state. 
 
 Set permissions to your storage bucket and to your project by running the following command:
 ```sh
 export project_number=$(gcloud projects describe <walkthrough-project-name/> --format="value(projectNumber)")
 gcloud storage buckets add-iam-policy-binding  gs://$bucket_name --member=serviceAccount:$project_number@cloudbuild.gserviceaccount.com --role=roles/storage.objectAdmin
-gcloud projects add-iam-policy-binding <walkthrough-project-id-no-domain/> --member=serviceAccount:$project_number@cloudbuild.gserviceaccount.com --roles=roles/compute.securityAdmin
+gcloud projects add-iam-policy-binding <walkthrough-project-id-no-domain/> --member=serviceAccount:$project_number@cloudbuild.gserviceaccount.com --role=roles/compute.securityAdmin
 ```
