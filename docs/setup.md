@@ -1,7 +1,4 @@
 # Initial Setup
-For an interactive tutorial walkthrough, use the following link:
-
-[![Open in Cloud Shell](https://gstatic.com/cloudssh/images/open-btn.svg)](https://shell.cloud.google.com/cloudshell/editor?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fzefdelgadillo%2Fgcp-firewall-delegation&cloudshell_git_branch=main&&cloudshell_tutorial=docs%2Fsetup.md)
 
 ## Select Project
 To get started, select the project that contains your Shared VPC.
@@ -9,9 +6,28 @@ To get started, select the project that contains your Shared VPC.
 <walkthrough-project-setup></walkthrough-project-setup>
 
 ## Enable APIs
+Set your current project by running the following command. You may need to login first, using `gcloud auth login`.
+```sh
+gcloud config set project <walkthrough-project-name/>
+```
+
 Once you're in the correct project, enable the APIs we need for the automation tool. <walkthrough-enable-apis apis="storage.googleapis.com,cloudbuild.googleapis.com">enable the APIs</walkthrough-enable-apis>
 
 ## Create Storage Bucket
-Create a <walkthrough-menu-navigation sectionId="STORAGE_SECTION">Google Cloud Storage bucket</walkthrough-menu-navigation> to maintain your Terraform state files. Each team will have its own statefile in this bucket.
+Create a Google Cloud Storage bucket to maintain your Terraform state files. Each team will have its own statefile in this bucket.
 
-Note down the name of your Storage bucket, since we'll use it in the next step.
+You can use the command above to create a bucket, replacing `<BUCKET_NAME>` with a name for your bucket.
+
+```sh
+export bucket_name=BUCKET_NAME
+gcloud storage buckets create gs://$bucket_name
+```
+## Set permissions
+Cloud Build will use its Service Account to run Terraform, build Firewall Rule resources, and manage storage bucket state. 
+
+Set permissions to your storage bucket and to your project by running the following command:
+```sh
+export project_number=$(gcloud projects describe <walkthrough-project-name/> --format="value(projectNumber)")
+gcloud storage buckets add-iam-policy-binding  gs://$bucket_name --member=serviceAccount:$project_number@cloudbuild.gserviceaccount.com --role=roles/storage.objectAdmin
+gcloud projects add-iam-policy-binding <walkthrough-project-id-no-domain/> --member=serviceAccount:$project_number@cloudbuild.gserviceaccount.com --roles=roles/compute.securityAdmin
+```
