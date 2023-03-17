@@ -20,6 +20,8 @@ You can use the command above to create a bucket, replacing `<BUCKET_NAME>` with
 
 ```sh
 export bucket_name=BUCKET_NAME
+```
+```sh
 gcloud storage buckets create gs://$bucket_name
 ```
 ## Set permissions
