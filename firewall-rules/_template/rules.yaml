@@ -1,0 +1,12 @@
+team: _template
+rules:
+- name: 'allow-ingress-from-app'
+  description: 'Allow ingress to database for web application server'
+  direction: 'INGRESS'
+  action: 'allow'
+  protocol: 'tcp'
+  ranges: [10.0.0.0/24]
+  ports:
+  - 5432
+  source_service_accounts:
+  - 'serviceaccount@0000000.gserviceaccount.com'
