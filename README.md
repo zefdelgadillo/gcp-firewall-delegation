@@ -2,10 +2,13 @@
 This example repository provides an approach for managing Google Cloud firewall rules in a Shared VPC across multiple teams using a GitOps approach. The infrastructure is deployed using Terraform, and the deployment prcoess is automated with Cloud Build.
 
 ## Setup
-1. Complete the initial setup steps using this [tutorial](https://shell.cloud.google.com/cloudshell/editor?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fzefdelgadillo%2Fgcp-firewall-delegation&cloudshell_git_branch=main&cloudshell_tutorial=docs%2Fsetup.md&cloudshell_workspace=./). You'll only need to do this once.
-2. Configure your teams by completing the following steps:
-* * Create a directory for each team in `firewall-rules/` using the example template. Include a rules.yaml file and CODEOWNERS file.
-* * Create an entry in team-config.yaml for each team that matches the team name directory. Add priority values in the format [lowest, highest]. See [priority values](#priority-values) for more information.
+### Initial Setup Steps
+Complete the initial setup steps using these [instructions](./docs/setup.md). You'll only need to do this once.
+
+Alternatively, you can use the following [tutorial](https://shell.cloud.google.com/cloudshell/editor?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fzefdelgadillo%2Fgcp-firewall-delegation&cloudshell_git_branch=main&cloudshell_tutorial=docs%2Fsetup.md&cloudshell_workspace=./).
+
+### Team Configuration
+To configure the repository for management by a delegated team, use these [instructions](./docs/setup.md). You'll need to complete these for each team.
 
 ## Contributing
 To contribute to this, create a pull request with your Firewall Rule. The pull request will trigger the automated validation of firewall rules using `gcloud terraform vet` (TODO). If any validation checks fail, the pull request will be blocked from merging.

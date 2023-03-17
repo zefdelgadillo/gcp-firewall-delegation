@@ -1,0 +1,11 @@
+# rules:
+# - name: 'allow-ingress-from-app'
+#   description: 'Allow ingress to database for web application server'
+#   direction: 'INGRESS'
+#   action: 'allow'
+#   protocol: 'tcp'
+#   ranges: [10.0.0.0/32]
+#   ports:
+#   - 9999
+#   target_service_accounts:
+#   - '661552267468-compute@developer.gserviceaccount.com'

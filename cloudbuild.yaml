@@ -27,6 +27,8 @@ steps:
       fi
     done
 # Terraform Validator step can go here, which would block deployment
+# - id: validate-terraform
+#   name:
 - id: apply-terraform
   name: 'hashicorp/terraform:1.0.0'
   entrypoint: '/bin/sh'
